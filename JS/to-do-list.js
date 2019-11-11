@@ -14,9 +14,9 @@ window.ToDoList={
     },
 
     createItem: function() {
-        let descriptionValue=$("#descripion-field").val();
+        let descriptionValue=$("#description-field").val();
         let deadlineValue=$("#deadline-field").val();
-        var requestBody={
+        var requestBody= {
 
             description:descriptionValue,
             deadline:deadlineValue
@@ -33,6 +33,38 @@ window.ToDoList={
             ToDoList.getItems();
 
         })
+    },
+
+
+       markItemDone: function(id, done) {
+
+        let requestBody= {
+
+            done: done
+
+        };
+
+        $.ajax({
+
+            url:ToDoList.API_URL+"?id=" + id,
+            method:"PUT",
+            contentType: "application/json",
+                data: JSON.stringify(requestBody)
+        }) .done(function () {
+                ToDoList.getItems();
+            })
+    },
+
+   deleteItem: function(id) {
+
+        $.ajax({
+
+            url:ToDoList.API_URL+"?id=" + id,
+            method:"DELETE"
+
+        }) .done(function () {
+                ToDoList.getItems();
+            })
     },
 
 
@@ -55,7 +87,7 @@ window.ToDoList={
               <td>${item.description}</td>
               <td>${deadline}</td>
               <td><input type="checkbox" class="mark-done" data-id="${item.id}" ${checkAttribute}/></td>
-              <td><a href="#" class="delete-item"><i class="far fa-trash-alt" data-id="${item.id}"></i></a></td> 
+              <td><a href="#" class="delete-item" data-id="${item.id}"><i class="far fa-trash-alt" data-id="${item.id}"></i></a></td> 
           </tr>`
     },
 
@@ -64,6 +96,24 @@ window.ToDoList={
         $("#create-item-form").submit(function (event) {
             event.preventDefault();
             ToDoList.createItem();
+
+        });
+// delegate is necessary because our checkbox is dynamically injected in the page(not present from
+// the begining, load
+
+        $("#to-do-items").delegate(".mark-done", "change", function (event) {
+            event.preventDefault();
+            let id= $(this).data("id");
+            let checked= $(this).is(":checked");
+            ToDoList.markItemDone(id, checked);
+
+        });
+
+        $("#to-do-items").delegate(".delete-item", "click", function (event) {
+            event.preventDefault();
+            let id= $(this).data("id");
+
+            ToDoList.deleteItem(id);
 
         })
     }
