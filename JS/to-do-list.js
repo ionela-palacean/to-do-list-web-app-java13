@@ -12,6 +12,30 @@ window.ToDoList={
             ToDoList.displayItems(JSON.parse(response));
         });
     },
+
+    createItem: function() {
+        let descriptionValue=$("#descripion-field").val();
+        let deadlineValue=$("#deadline-field").val();
+        var requestBody={
+
+            description:descriptionValue,
+            deadline:deadlineValue
+        };
+        $.ajax({
+
+                url:ToDoList.API_URL,
+                method:"POST",
+                // MIME  type
+                contentType:"application/json",
+                data:JSON.stringify(requestBody)
+            }) .done(function () {
+
+            ToDoList.getItems();
+
+        })
+    },
+
+
     displayItems: function (items) {
         var tableContent="";
 
@@ -33,7 +57,17 @@ window.ToDoList={
               <td><input type="checkbox" class="mark-done" data-id="${item.id}" ${checkAttribute}/></td>
               <td><a href="#" class="delete-item"><i class="far fa-trash-alt" data-id="${item.id}"></i></a></td> 
           </tr>`
+    },
+
+    bindEvents: function () {
+
+        $("#create-item-form").submit(function (event) {
+            event.preventDefault();
+            ToDoList.createItem();
+
+        })
     }
 };
 
 ToDoList.getItems();
+ToDoList.bindEvents();
