@@ -8,7 +8,7 @@ window.Loan= {
 
         }).done(function (response) {
             console.log(response);
-           // Loan.displayLoans(response.content);
+           Loan.displayLoans(response.content);
         });
     },
 
@@ -18,14 +18,14 @@ window.Loan= {
        <div id="content">
  <h1>Simple Loan Calculator</h1>
 
-    <h3>Please Introduce bellow the amount  and the period</h3>
+    <h3>Please Introduce bellow the amount and the period</h3>
 
      <form id="loan-form">
-        <label for="loan">Loan Type:</label><input type="text"  id="${loan.id}" placeholder="${loan.loanType}">
+        <label for="loan">Loan Type:</label><input type="text" id="${loan.id}" placeholder="${loan.loanType}">
 
-        <label for="loan">Total Loan Sum: </label><input type="double"  id="${loan.id}" placeholder="${loan.loanSum}">
+        <label for="loan">Total Loan Sum: </label><input type="double" id="${loan.id}" placeholder="${loan.loanSum}">
 
-        <label for="loan">Loan Period: </label><input type="integer"  id=${loan.id}" placeholder="${loan.loanPeriod}">
+        <label for="loan">Loan Period: </label><input type="integer"  id="${loan.id}" placeholder="${loan.loanPeriod}">
         <input type="submit" id="submit-form"/>
 
     </form>
@@ -59,6 +59,6 @@ displayLoans: function(loans){
 
 
 Loan.getLoans();
-//Loan.getLoanHtml();
+Loan.getLoanHtml();
 
 //Loan.bindEvents();
