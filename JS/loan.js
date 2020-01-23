@@ -8,7 +8,7 @@ window.Loan= {
 
         }).done(function (response) {
             console.log(response);
-           Loan.displayLoans(response.content);
+
         });
     },
 
@@ -23,10 +23,11 @@ window.Loan= {
      <form id="loan-form">
         <label for="loan">Loan Type:</label><input type="text" id="${loan.id}" placeholder="${loan.loanType}">
 
-        <label for="loan">Total Loan Sum: </label><input type="double" id="${loan.id}" placeholder="${loan.loanSum}">
+         <label for="loan">Total Loan Sum: </label><input type="double" id="${loan.id}" placeholder="${loan.loanSum}">
 
-        <label for="loan">Loan Period: </label><input type="integer"  id="${loan.id}" placeholder="${loan.loanPeriod}">
-        <input type="submit" id="submit-form"/>
+         <label for="loan">Loan Period: </label><input type="integer"  id="${loan.id}" placeholder="${loan.loanPeriod}">
+        
+          <input type="submit" id="submit-form"/>
 
     </form>
    <table id="loan">
@@ -44,21 +45,51 @@ window.Loan= {
 
 </div>
        
-       
 `
 
     },
 
-displayLoans: function(loans){
-        var loansHtml="";
-        loans.forEach(oneLoan => loansHtml+=Loan.getLoanHtml(oneLoan));
-        $(".label .form").html(loansHtml);
-}
+    createItem: function() {
+        let loanType=$("#loan-type").val();
+        let sum =$("#loan-sum").val();
+        let period=$("#loan-period").val();
+        var requestBody= {
+
+            loanType:loanType,
+            loanSum:sum,
+            loanPeriod:period
+        };
+        $.ajax({
+
+            url:Loan.API_BASE_URL + "/loans",
+            method:"POST",
+            // MIME  type
+            contentType:"application/json",
+            data:JSON.stringify(requestBody)
+        }) .done(function () {
+            Loan.getLoans();
+
+        })
+    },
+
+
+
+    bindEvents: function () {
+
+        $("#loan-form").submit(function (event) {
+            event.preventDefault();
+            Loan.createItem();
+
+                confirm("Doriti efectuarea calculului?")
+        });
+
+        }
+
 
 }
 
-
+//Loan.createItem();
 Loan.getLoans();
-Loan.getLoanHtml();
 
-//Loan.bindEvents();
+
+Loan.bindEvents();
