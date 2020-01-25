@@ -17,11 +17,13 @@ window.Loan= {
         let loanType=$("#loan-type").val();
         let sum =$("#loan-sum").val();
         let period=$("#loan-period").val();
+        let calculator;
         var requestBody= {
 
             loanType:loanType,
             loanSum:sum,
-            loanPeriod:period
+            loanPeriod:period,
+
         };
         $.ajax({
 
@@ -37,14 +39,39 @@ window.Loan= {
     },
 
 
+
+    calculator: function() {
+
+        let loanType=$("#loan-type").val();
+        let sum =$("#loan-sum").val();
+        let period=$("#loan-period").val();
+
+        var calculation= {
+
+            loanType:loanType,
+            loanSum:sum,
+            loanPeriod:period,
+
+        };
+
+        let newVar= ((sum / period) + ((sum * 7.5) / 100) / 12);
+
+      return newVar;
+
+
+    },
+
     bindEvents: function () {
 
         $("#loan-form").submit(function (event) {
             event.preventDefault();
-            Loan.createItem();
+           Loan.createItem();
 
-                confirm("Doriti efectuarea calculului?")
+                confirm("Do you want to return the Monthly Loan rate?")
 
+            console.log(Loan.calculator());
+
+                confirm("Monthly Loan rate is:   "+Loan.calculator());
         });
 
         }
@@ -52,8 +79,5 @@ window.Loan= {
 
 }
 
-//Loan.createItem();
 Loan.getLoans();
-
-
 Loan.bindEvents();
