@@ -9,37 +9,33 @@
 <body>
 
 <div id="content">
- <h1>Simple Loan Calculator</h1>
+    <h1>Simple Loan Calculator</h1>
+    <p class="subtitle" > Our Bank offer now:</p>
+    <p class="subtitle" > The Simple Loan Calculator that will determine your estimated payments for different loan amounts, rates and terms . </p>
+    <p class="subtitle" > This estimative calculation take into consideration an interest fixed to 7.5%, without any extra costs. </p>
+    <p class="subtitle" >  Please note, the costs can be changed, so the calculation it is available only for today </p>
 
     <h3>Please Introduce bellow the amount  and the period</h3>
 
     <form id="loan-form">
-        <label for="loan">Loan Type: <select id="loan-type">
-            <option value="0">-</option>
+        <label for="loan">Loan Type:  <br> </br> <select id="loan-type">
+            <option value="0">  </option>
             <option value="Real Estate Investments">Real Estate Investments </option>
             <option value="Personal needs">Personal Needs</option>
-        </select>
-
-        <label for="loan">Total Loan sum (Default Currency: EUR): </label><input type="double" id="loan-sum" placeholder="Loan Sum">
-
-        <label for="loan">Loan Period (in Months): </label><input type="integer" id="loan-period" placeholder="Loan Period">
-
-        <input type="submit" id="submit-form"/>
+        </select> </label>
+        <br> </br>
+            <label for="loan">Total Loan sum (Default Currency: EUR): <br> </br><input type= "number" min="0"  id="loan-sum" placeholder="Loan Sum"></label>
+        <br> </br>
+            <label for="loan">Loan Period (in Months):  <br> </br> <input type="number" id="loan-period" placeholder="Loan Period"></label>
+        <br> </br>
+        <br> </br>
+            <input type="submit" id="submit-form"/>
 
     </form>
-   <table id="loan">
-   </table>
-
-       <thead>
-       <tr>
-       </tr>
-
-       </thead>
-       <tbody>
+    <table id="loan">
+    </table>
 
 
-       </tbody>
-   </table>
 
 </div>
 <script src="JS/lib/jquery-3.4.1.min.js"></script>
@@ -47,3 +43,4 @@
 
 </body>
 </html>
+

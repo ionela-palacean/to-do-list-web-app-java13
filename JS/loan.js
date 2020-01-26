@@ -54,7 +54,7 @@ window.Loan= {
 
         };
 
-        let newVar= ((sum / period) + ((sum * 7.5) / 100) / 12);
+        let newVar= ((sum / period) + ((sum * 7.5) / 100) / 12).toFixed(2);
 
       return newVar;
 
@@ -71,7 +71,7 @@ window.Loan= {
 
             console.log(Loan.calculator());
 
-                confirm("Monthly Loan rate is:   "+Loan.calculator());
+                confirm("Monthly Loan rate is :   "+Loan.calculator()+"Eur");
         });
 
         }
