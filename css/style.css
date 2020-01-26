@@ -2,15 +2,17 @@
 
 #loan-form{
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    background-color: #4CAF50;
-    width: 78%;
+    border:  3px solid darkslategrey;
+    background-color: #7FFFD4;
+    width: 60%;
+
+
 
 }
 
 
 
-#loan-label tr:nth-child(even){background-color: #4CAF50;}
+#loan-label tr:nth-child(even){background-color: #7FFFD4;}
 
 #loan-label tr:hover {background-color: #ddd;}
 
